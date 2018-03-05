@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <v-header></v-header>
+    <v-header :seller="seller"></v-header>
     <div class="tab">
 
       <div class="tab-item">
@@ -31,6 +31,20 @@
 
   import header from './components/Header.vue'
   export default{
+    data() {
+      return {
+        seller:{}
+      };
+    },
+    created(){
+      let _this=this
+      _this.axios.get('./static/data.json').then((res) => {
+
+          _this.seller=res.data.seller;
+          console.log( _this.seller)
+
+      })
+    },
     components:{
       'v-header':header
     }
@@ -43,11 +57,12 @@
     width: 100%;
     line-height: 40px;
     height: 40px;
+     border-bottom: solid 1px rgba(7,17,27,0.1);
 
   }
   .tab >.tab-item{
     flex: 1;
-    border: solid red 1px;
+    /*border: solid red 1px;*/
     text-align: center;
     font-size: 14px;
     color: rgb(77,85,93);
