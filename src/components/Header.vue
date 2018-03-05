@@ -150,6 +150,8 @@
     margin:-64px auto 0 auto;
     clear:both;
     font-size:32px;
+    border: solid 1px red;
+
   }
   .detail-main{
     padding-bottom:64px ;
