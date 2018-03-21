@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <router-view></router-view>
+    <router-view :seller="seller"></router-view>
 
   </div>
 </template>
@@ -41,7 +41,7 @@
       _this.axios.get('./static/data.json').then((res) => {
 
           _this.seller=res.data.seller;
-          console.log( _this.seller)
+
 
       })
     },

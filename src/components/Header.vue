@@ -26,11 +26,41 @@
       <span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span>
       <i class="iconfont closeicon">&#xe600;</i>
     </div>
-
+    <transition name="fade">
     <div v-show="detailShow" class="detail">
       <div class="detail-wrapper clearfix">
         <div class="detail-main">
           <h1 class="name">{{seller.name}}</h1>
+          <div class="star">
+            <el-rate
+                    v-model="star"
+                    disabled
+                    show-score
+                    text-color="orange"
+                    score-template="{value}">
+            </el-rate>
+          </div>
+         <!--线中题-->
+          <div class="title">
+            <div class="line"></div>
+            <div class="text">优惠信息</div>
+            <div class="line"></div>
+          </div>
+          <ul class="support">
+            <li class=".supper-item"
+                v-for="(item,index) in seller.supports">
+              <span style="text-align: center;margin-bottom: 12px">{{item.description}}</span>
+            </li>
+          </ul>
+          <!--线中题-->
+          <div class="title" >
+            <div class="line"></div>
+            <div class="text">商家公告</div>
+            <div class="line"></div>
+          </div>
+          <div class="bulletin">
+            <p class="content">{{seller.bulletin}}</p>
+          </div>
         </div>
       </div>
       <div class="detail-close">
@@ -38,7 +68,7 @@
       </div>
 
     </div>
-
+    </transition>
   </div>
 
 </template>
@@ -52,7 +82,9 @@
     },
     data() {
       return {
-        detailShow:false
+        detailShow:false,
+        star:4
+
       }
     },
     methods: {
@@ -137,30 +169,69 @@
     width: 100%;
     height: 100%;
     overflow: auto;
+    backdrop-filter:blur(30px);
     background: rgba(7,17,27,0.8);
-    padding-top: 50px;
+  }
+
+  .fade-enter, .fade-leave-active {
+    opacity: 0;
+
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 1s;
   }
   .detail-wrapper{
     min-height: 100%;
+
+  }
+
+  .detail-main{
+    padding-bottom:64px;
+    padding-top: 64px;
+  }
+  .detail-main>.name{
+    text-align: center;
+    margin-left: 12px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .detail-main>.star{
+    text-align: center;
+    margin-top: 20px;
+  }
+  .detail-main>.title{
+    display: flex;
+    width: 80%;
+    margin: 28px auto 24px auto;
+  }
+  .detail-main>.support{
+   width: 80%;
+    margin: 0 auto;
+  }
+  .detail-main>.bulletin{
+    width: 80%;
+    margin: 0 auto;
+  }
+  .detail-main>.title>.line{
+    flex: 1;
+    position: relative;
+    top: -10px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+  .detail-main>.title>.text{
+    padding: 0 12px;
+    font-size: 14px;
+    font-weight: 700;
   }
   .detail>.detail-close{
-   position: relative;
+    position: relative;
     width: 32px;
     height: 32px;
     margin:-64px auto 0 auto;
     clear:both;
     font-size:32px;
-    border: solid 1px red;
-
-  }
-  .detail-main{
-    padding-bottom:64px ;
-  }
-  .detail-main>.name{
-    line-height: 16px;
+    line-height: 32px;
     text-align: center;
-    font-size: 16px;
-    font-weight: 700;
-
   }
 </style>
